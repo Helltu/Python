@@ -4,17 +4,23 @@ cont_loop = True
 while cont_loop:
     key = input("Выберите пункт меню:\n\t1)Просмотр описания\n\t2)Просмотр цены\n\t3)Просмотр количества\n\t4)Всю информацию\n\t5)Покупка\n\t6)До свидания\n")
     if key == '1':
-        print('Состав всех изделий магазина:')
-        for item in jewelry:
-            print('\t' + item + ' - ' + jewelry.get(item)[0])
+        name = input('Введите название изделия, описание которого хотите просмотреть: ')
+        if name in jewelry:
+            print('Описание изделия "' + name + '": ' + jewelry.get(name)[0])
+        else:
+            print('В магазине нет такого изделия')
     elif key == '2':
-        print('Цена всех изделий магазина:')
-        for item in jewelry:
-            print('\t' + item + ' - ' + str(jewelry.get(item)[1]))
+        name = input('Введите название изделия, цену которого хотите просмотреть: ')
+        if name in jewelry:
+            print('Цена изделия "' + name + '": ' + str(jewelry.get(name)[1]))
+        else:
+            print('В магазине нет такого изделия')
     elif key == '3':
-        print('Количество всех изделий магазина:')
-        for item in jewelry:
-            print('\t' + item + ' - ' + str(jewelry.get(item)[2]))
+        name = input('Введите название изделия, количество которого хотите просмотреть: ')
+        if name in jewelry:
+            print('Количество изделия "' + name + '": ' + str(jewelry.get(name)[2]))
+        else:
+            print('В магазине нет такого изделия')
     elif key == '4':
         print('Вся информация обо всех изделиях магазина:')
         for item in jewelry:
