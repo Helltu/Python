@@ -4,46 +4,59 @@ cont_loop = True
 while cont_loop:
     key = input("Выберите пункт меню:\n\t1)Просмотр описания\n\t2)Просмотр цены\n\t3)Просмотр количества\n\t4)Всю информацию\n\t5)Покупка\n\t6)До свидания\n")
     if key == '1':
-        name = input('Введите название изделия, описание которого хотите просмотреть: ')
+        name = input(
+            'Введите название изделия, описание которого хотите просмотреть: ')
         if name in jewelry:
-            print('Описание изделия "' + name + '": ' + jewelry.get(name)[0])
+            print('Описание изделия "' + name + '": ' + jewelry[name][0])
         else:
             print('В магазине нет такого изделия')
     elif key == '2':
-        name = input('Введите название изделия, цену которого хотите просмотреть: ')
+        name = input(
+            'Введите название изделия, цену которого хотите просмотреть: ')
         if name in jewelry:
-            print('Цена изделия "' + name + '": ' + str(jewelry.get(name)[1]))
+            print('Цена изделия "' + name + '": ' + str(jewelry[name][1]))
         else:
             print('В магазине нет такого изделия')
     elif key == '3':
-        name = input('Введите название изделия, количество которого хотите просмотреть: ')
+        name = input(
+            'Введите название изделия, количество которого хотите просмотреть: ')
         if name in jewelry:
-            print('Количество изделия "' + name + '": ' + str(jewelry.get(name)[2]))
+            print('Количество изделия "' + name +
+                  '": ' + str(jewelry[name][2]))
         else:
             print('В магазине нет такого изделия')
     elif key == '4':
         print('Вся информация обо всех изделиях магазина:')
         for item in jewelry:
-            print('\t' + item + ':\n\t\tСостав: ' + jewelry.get(item)[0] + '\n\t\tЦена: ' + str(
-                jewelry.get(item)[1]) + '\n\t\tКоличество: ' + str(jewelry.get(item)[2]))
+            print('\t' + item + ':\n\t\tСостав: ' + jewelry[item][0] + '\n\t\tЦена: ' + str(
+                jewelry[item][1]) + '\n\t\tКоличество: ' + str(jewelry[item][2]))
     elif key == '5':
         name = input('Введите название изделия: ')
-        amount = input('Ввелите количество изделий: ')
-        if (not (amount.isdigit())):
-            print('Введено некорректное значение количества')
-        else:
-            amount = int(amount)
-            got = jewelry.get(name)
-            if not (got):
-                print('\tВ магазине нет такого изделия')
-            elif got[2] < amount:
-                print('\tВ магазине нет такого количество данного изделия')
+        if name in jewelry:
+            amount = input('Ввелите количество изделий: ')
+            if (not (amount.isdigit())):
+                print('Введено некорректное значение количества')
             else:
-                print('\tОбщая стоимость купленных изделий: ' +
-                      str(got[1]*amount))
-                print(
-                    '\tКоличество данных изделий оставшихся в магазине: ' + str(got[2]-amount))
-                jewelry[name][2] -= amount
+                amount = int(amount)
+                if not (jewelry[name]):
+                    print('\tВ магазине нет такого изделия')
+                elif jewelry[name][2] < amount:
+                    print('\tВ магазине нет такого количество данного изделия')
+                else:
+                    print('\tОбщая стоимость купленных изделий: ' +
+                          str(jewelry[name][1]*amount))
+                    print(
+                        '\tКоличество данных изделий оставшихся в магазине: ' + str(jewelry[name][2]-amount))
+                    jewelry[name][2] -= amount
+                    print('________________________________________________________________________')
+                    print('|Наименование, материал\t\t|Количество, шт.\t|Цена, $\t|')
+                    print('|_______________________________|_______________________|_______________|')
+                    print('|' + name.capitalize() + ', "' + jewelry[name][0] + '"\t\t|' + str(amount) + '\t\t\t|' + str(jewelry[name][1]) + '\t\t|')
+                    print('|_______________________________|_______________________|_______________|')
+                    print('|Итого:\t\t\t\t\t\t\t|' + str(jewelry[name][1]*amount) + '\t\t|')
+                    print('|_______________________________________________________|_______________|')
+        else:
+            print('В магазине нет такого изделия')
     elif key == '6':
         print('\tПрограмма прекращает свою работу...')
         cont_loop = False

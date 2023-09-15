@@ -8,3 +8,4 @@ if len(resArray) == 0:
     print('Нет слов, не заканчивающихся на букву "а"')
 else:
     print(' '.join(resArray))
+
