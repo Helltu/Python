@@ -1,10 +1,7 @@
 import random
 
-set1 = set()
-set2 = set()
-for i in range(10):
-    set1.add(random.randint(-10, 10))
-    set2.add(random.randint(-10, 10))
+set1 = {random.randint(-100, 100) for i in range(20)}
+set2 = {random.randint(-100, 100) for i in range(20)}
 print('Полученные множества: ')
 print(set1)
 print(set2)
