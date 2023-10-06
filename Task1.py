@@ -10,5 +10,8 @@ def is_prime(a):
     except Exception:
         print('Произошла ошибка!')
         return 0
-
-print(is_prime(19))
+try:
+    number = int(input('Введите натуральное число: '))
+    print(is_prime(number))
+except Exception:
+    print('Произошла ошибка!')

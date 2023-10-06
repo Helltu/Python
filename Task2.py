@@ -30,4 +30,4 @@ def my_func(a):
         return 0
 
 
-print(myFunc([1.12, 1.666, 2]))
+print(my_func([1.12, 1.666, 2]))
