@@ -1,6 +1,7 @@
 import g4f
 import asyncio
 from aiogram import Dispatcher, Bot, types
+from aiogram.filters import CommandStart
 
 token = '6704974378:AAGmoZPMpLLFVqPEPfWQnK8HN2BPE-32Obc'
 g4f.debug.logging = True
@@ -44,7 +45,11 @@ async def start():
 
     dp.startup.register(start_bot)
     dp.shutdown.register(stop_bot)
-
+    
+    @dp.message(CommandStart())
+    async def start(message: types.Message):
+        await message.answer('Привет, я готов отвечать на твои запросы!')
+    
     dp.message.register(gpt)
 
     try:
