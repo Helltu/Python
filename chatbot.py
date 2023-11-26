@@ -23,15 +23,18 @@ async def stop_bot(bot: Bot):
 
 
 async def gpt(message: types.Message):
+    user_id = message.from_user.id
+    if user_id not in message_storage:
+        message_storage[user_id] = []
     await message.bot.send_chat_action(message.chat.id, 'typing')
     try:
+        message_storage[user_id].append({'role': 'user', 'content': message.text})
         response = await g4f.ChatCompletion.create_async(
             model=g4f.models.gpt_35_turbo,
             provider=g4f.Provider.You,
-            messages=message_storage[message.from_user.id]
+            messages=message_storage[user_id]
         )
-        message_storage[message.from_user.id].append({'role': 'user', 'content': message.text})
-        message_storage[message.from_user.id].append({'role': 'assistant', 'content': response})
+        message_storage[user_id].append({'role': 'assistant', 'content': response})
         for item in split_string(response, 4096):
             await message.reply(item)
     except Exception as e:
